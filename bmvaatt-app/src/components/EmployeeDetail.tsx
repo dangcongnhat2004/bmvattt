@@ -1,4 +1,4 @@
-import React from 'react';
+
 import '../dashboard.css';
 
 interface Props {
@@ -64,7 +64,7 @@ export default function EmployeeDetail({ user, onBack }: Props) {
             <div className="form-grid">
               <div className="form-group">
                 <label className="form-label">Employee ID</label>
-                <input type="text" className="form-input" defaultValue={user.empId} readOnly className="form-input readonly" />
+                <input type="text" defaultValue={user.empId} readOnly className="form-input readonly" />
               </div>
               <div className="form-group">
                 <label className="form-label">Department</label>

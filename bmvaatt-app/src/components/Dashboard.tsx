@@ -171,9 +171,9 @@ export default function Dashboard({ onNavigate }: Props) {
         {activePage === 'create_user' ? (
           <CreateUser onBack={() => setActivePage('admin_dashboard')} />
         ) : activePage === 'user_management' ? (
-          <UserManagement onBack={() => setActivePage('admin_dashboard')} />
+          <UserManagement />
         ) : activePage === 'role_management' ? (
-          <RoleManagement onBack={() => setActivePage('admin_dashboard')} />
+          <RoleManagement />
         ) : selectedUser ? (
           <EmployeeDetail user={selectedUser} onBack={() => setSelectedUser(null)} />
         ) : (

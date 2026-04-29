@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../dashboard.css';
 import api from '../api/axios';
 
-interface Props {
-  onBack: () => void;
-}
-
-export default function UserManagement({ onBack }: Props) {
+export default function UserManagement() {
   const [accounts, setAccounts] = useState<any[]>([]);
   const [roles, setRoles] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
