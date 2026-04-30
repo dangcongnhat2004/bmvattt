@@ -680,3 +680,71 @@
   border-color: #2563eb;
   color: #2563eb;
 }
+
+/* Tabs */
+.detail-tabs {
+  display: flex;
+  background-color: #fafbfc;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0 30px;
+}
+
+.detail-tab {
+  padding: 15px 25px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.detail-tab:hover {
+  color: #2563eb;
+}
+
+.detail-tab.active {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 12px 15px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.data-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.85rem;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-active { background-color: #e6f7ff; color: #1890ff; }
+.status-expired { background-color: #fff1f0; color: #f5222d; }
+.status-paid { background-color: #f6ffed; color: #52c41a; }
+.status-draft { background-color: #fff7e6; color: #fa8c16; }
+

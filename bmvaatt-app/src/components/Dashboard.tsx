@@ -88,6 +88,12 @@ export default function Dashboard({ onNavigate }: Props) {
     }
   };
 
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const permissions = user.permissions || [];
+  const initials = user.fullName ? user.fullName.split(' ').map((n: string) => n[0]).join('').toUpperCase().slice(0, 2) : '??';
+
+  const hasPermission = (perm: string) => permissions.includes(perm);
+
   return (
     <div className="dashboard-container">
       {/* Sidebar */}
@@ -97,49 +103,30 @@ export default function Dashboard({ onNavigate }: Props) {
         <div className="sidebar-menu">
           <div className="menu-section">
             <div className="menu-section-title">Main Menu</div>
-            <div className="menu-item">
-              <span className="menu-icon"><IconHome /></span> Homepage
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon"><IconUsers /></span> Employee List
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon"><IconCircleUser /></span> My Profile
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon"><IconAward /></span> Qualifications
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon"><IconBrain /></span> Skills
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon"><IconIdCard /></span> Emergency Contacts
-            </div>
+            {hasPermission('employees.read') && (
+              <div className={`menu-item ${activePage === 'admin_dashboard' ? 'active' : ''}`} onClick={() => { setActivePage('admin_dashboard'); setSelectedUser(null); }}>
+                <span className="menu-icon"><IconGrid /></span> Employee List
+              </div>
+            )}
           </div>
 
           <div className="menu-section">
             <div className="menu-section-title">Management Functions</div>
-            <div className={`menu-item ${activePage === 'admin_dashboard' ? 'active' : ''}`} onClick={() => { setActivePage('admin_dashboard'); setSelectedUser(null); }}>
-              <span className="menu-icon"><IconGrid /></span> Admin Dashboard
-            </div>
-            <div className={`menu-item ${activePage === 'user_management' ? 'active' : ''}`} onClick={() => { setActivePage('user_management'); setSelectedUser(null); }}>
-              <span className="menu-icon"><IconUserCog /></span> User Management
-            </div>
-            <div className={`menu-item ${activePage === 'create_user' ? 'active' : ''}`} onClick={() => { setActivePage('create_user'); setSelectedUser(null); }}>
-              <span className="menu-icon"><IconUserPlus /></span> Create User
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon"><IconSliders /></span> Profile Settings
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon"><IconShield /></span> Privacy Settings
-            </div>
-            <div className={`menu-item ${activePage === 'role_management' ? 'active' : ''}`} onClick={() => { setActivePage('role_management'); setSelectedUser(null); }}>
-              <span className="menu-icon"><IconShieldKey /></span> Permissions
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon"><IconReset /></span> Password Reset
-            </div>
+            {hasPermission('users.read') && (
+              <div className={`menu-item ${activePage === 'user_management' ? 'active' : ''}`} onClick={() => { setActivePage('user_management'); setSelectedUser(null); }}>
+                <span className="menu-icon"><IconUserCog /></span> User Management
+              </div>
+            )}
+            {hasPermission('employees.create') && (
+              <div className={`menu-item ${activePage === 'create_user' ? 'active' : ''}`} onClick={() => { setActivePage('create_user'); setSelectedUser(null); }}>
+                <span className="menu-icon"><IconUserPlus /></span> Create User
+              </div>
+            )}
+            {hasPermission('roles.manage') && (
+              <div className={`menu-item ${activePage === 'role_management' ? 'active' : ''}`} onClick={() => { setActivePage('role_management'); setSelectedUser(null); }}>
+                <span className="menu-icon"><IconShieldKey /></span> Permissions
+              </div>
+            )}
           </div>
           
           <div className="menu-section">
@@ -156,11 +143,11 @@ export default function Dashboard({ onNavigate }: Props) {
         <div className="sidebar-footer">
           <div className="user-profile">
             <div style={{ backgroundColor: '#2563eb', color: 'white', width: 40, height: 40, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', marginRight: 12 }}>
-              AD
+              {initials}
             </div>
             <div className="user-info">
-              <span className="user-name">Manager Taro</span>
-              <span className="user-role">Senior Manager</span>
+              <span className="user-name">{user.fullName || 'Unknown'}</span>
+              <span className="user-role">{user.roleCodes?.[0] || 'User'}</span>
             </div>
           </div>
         </div>

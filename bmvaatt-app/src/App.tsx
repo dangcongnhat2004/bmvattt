@@ -4,6 +4,7 @@ import ForgotPassword from './components/ForgotPassword'
 import VerifyIdentity from './components/VerifyIdentity'
 import ResetPassword from './components/ResetPassword'
 import Dashboard from './components/Dashboard'
+import Register from './components/Register'
 
 function App() {
   const [currentPage, setCurrentPage] = useState(() => {
@@ -14,6 +15,8 @@ function App() {
     switch (currentPage) {
       case 'login':
         return <Login onNavigate={setCurrentPage} />
+      case 'register':
+        return <Register onNavigate={setCurrentPage} />
       case 'forgot':
         return <ForgotPassword onNavigate={setCurrentPage} />
       case 'verify':

@@ -73,6 +73,12 @@ export default function Login({ onNavigate }: Props) {
         <a className="auth-link-center" onClick={() => onNavigate('forgot')}>
           Forgot your password? Click here
         </a>
+        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+          <span style={{ color: '#666' }}>Don't have an account? </span>
+          <a className="auth-link-inline" onClick={() => onNavigate('register')} style={{ cursor: 'pointer', color: '#0066cc' }}>
+            Register here
+          </a>
+        </div>
       </div>
     </div>
   );
